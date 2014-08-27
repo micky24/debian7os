@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright by Yurissh OpenSource
+# Copyright by Micky Maximus
 # ================================
 # 
 
