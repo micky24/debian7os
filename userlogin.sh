@@ -42,4 +42,4 @@ echo "-------------------"
 last | grep ppp | grep still
 
 echo "-----------------------------------------------"
-echo "Script Modified by Yurissh OpenSource";
+echo "Script Modified by Micky Maximus";
