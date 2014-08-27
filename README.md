@@ -3,7 +3,7 @@ Original Script for VPS Debian 7
 Service  
 -------  
 OpenVPN  : TCP 1194 (client config : http://IPVPS:81/client.tar)  
-OpenSSH : 22, 143  
+OpenSSH : 22  
 Dropbear : 443  
 Squid3 : 8080, 80 (limit to IP VPS)  
 Badvpn : badvpn-udpgw port 7300  
@@ -39,9 +39,9 @@ MRTG     : http://IPVPS:81/mrtg/
 Timezone : Asia/Jakarta  
 Fail2Ban : [on]  
 IPv6     : [off]  
-VPS Akan Reboot Tiap 6 Jam Sekali  
+VPS Akan Reboot Tiap Tengah Malam  
 
 ===========================
 
-                                              Modified by Yurissh Opensource
+                                              Modified by Micky Maximus
                                 Thanks to Original Creator Kang Arie Wijayanto and Mikodemos
