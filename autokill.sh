@@ -1,7 +1,7 @@
 while :
   do
   ./userlimit.sh 2
-  sleep 55 
+  sleep 15 
   done
 while :
   do
