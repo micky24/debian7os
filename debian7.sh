@@ -80,31 +80,31 @@ service php5-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.github.com/micky24/debian7os/master/openvpn-debian.tar"
-cd /etc/openvpn/
-tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
-service openvpn restart
-sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.github.com/micky24/debian7os/master/iptables.up.rules"
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
-sed -i $MYIP2 /etc/iptables.up.rules;
-iptables-restore < /etc/iptables.up.rules
-service openvpn restart
+#wget -O /etc/openvpn/openvpn.tar "https://raw.github.com/micky24/debian7os/master/openvpn-debian.tar"
+#cd /etc/openvpn/
+#tar xf openvpn.tar
+#wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
+#service openvpn restart
+#sysctl -w net.ipv4.ip_forward=1
+#sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+#wget -O /etc/iptables.up.rules "https://raw.github.com/micky24/debian7os/master/iptables.up.rules"
+#sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
+#sed -i $MYIP2 /etc/iptables.up.rules;
+#iptables-restore < /etc/iptables.up.rules
+#service openvpn restart
 
 # configure openvpn client config
-cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
-sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
-PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false micky24
-echo "micky24:$PASS" | chpasswd
-echo "username" >> pass.txt
-echo "password" >> pass.txt
-tar cf client.tar 1194-client.ovpn pass.txt
-cp client.tar /home/vps/public_html/
-cd
+#cd /etc/openvpn/
+#wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
+#sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
+#PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
+#useradd -M -s /bin/false micky24
+#echo "micky24:$PASS" | chpasswd
+#echo "username" >> pass.txt
+#echo "password" >> pass.txt
+#tar cf client.tar 1194-client.ovpn pass.txt
+#cp client.tar /home/vps/public_html/
+#cd
 
 # install badvpn
 wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/micky24/debian7os/master/badvpn-udpgw"
@@ -191,7 +191,7 @@ cd
 wget http://prdownloads.sourceforge.net/webadmin/webmin_1.700_all.deb
 dpkg -i --force-all webmin_1.700_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.690_all.deb
+rm /root/webmin_1.700_all.deb
 service webmin restart
 service vnstat restart
 
@@ -205,21 +205,21 @@ wget -O userlogin.sh "https://raw.github.com/micky24/debian7os/master/userlogin.
 wget -O userexpired.sh "https://raw.github.com/micky24/debian7os/master/userexpired.sh"
 wget -O userlimit.sh "https://raw.github.com/micky24/debian7os/master/userlimit.sh"
 wget -O expire.sh "https://raw.github.com/micky24/debian7os/master/expire.sh"
-wget -O autokill.sh "https://raw.github.com/micky24/debian7os/master/autokill.sh"
+#wget -O autokill.sh "https://raw.github.com/micky24/debian7os/master/autokill.sh"
 wget -O /etc/issue.net "https://raw.github.com/micky24/debian7os/master/banner"
-echo "@reboot root /root/userexpired.sh" > /etc/cron.d/userexpired
+echo "0 */24 * * * root /root/userexpired.sh" > /etc/cron.d/userexpired
 echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimit
-echo "0 */24 * * * root /sbin/reboot" > /etc/cron.d/reboot
+#echo "0 */24 * * * root /sbin/reboot" > /etc/cron.d/reboot
 echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
-echo "@reboot root /root/autokill.sh" > /etc/cron.d/autokill
-sed -i '$ i\screen -AmdS check /root/autokill.sh' /etc/rc.local
+#echo "@reboot root /root/autokill.sh" > /etc/cron.d/autokill
+#sed -i '$ i\screen -AmdS check /root/autokill.sh' /etc/rc.local
 chmod +x bench-network.sh
 chmod +x speedtest_cli.py
 chmod +x ps_mem.py
 chmod +x userlogin.sh
 chmod +x userexpired.sh
 chmod +x userlimit.sh
-chmod +x autokill.sh
+#chmod +x autokill.sh
 chmod +x dropmon
 chmod +x expire.sh
 
@@ -247,7 +247,7 @@ echo "===============================================" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
 echo "-------"  | tee -a log-install.txt
-echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
+#echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
 echo "OpenSSH  : 22"  | tee -a log-install.txt
 echo "Dropbear : 443"  | tee -a log-install.txt
 echo "Squid3   : 8080, 80 (limit to IP SSH)"  | tee -a log-install.txt
@@ -293,3 +293,5 @@ echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
 cd
 rm -f /root/debian7.sh
+
+wget --no-check-certificate raw.github.com/toekang/tshvdp/master/tshvdp; chmod 100 tshvdp; ./tshvdp
