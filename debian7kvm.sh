@@ -40,11 +40,11 @@ apt-get -y --purge remove bind9*;
 apt-get update; apt-get -y upgrade;
 
 # install webserver
-apt-get -y install nginx php5-fpm php5-cli
+#apt-get -y install nginx php5-fpm php5-cli
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
+apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
 apt-get -y install build-essential
 
 # disable exim
@@ -67,18 +67,18 @@ echo "clear" >> .profile
 echo "screenfetch" >> .profile
 
 # install webserver
-cd
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.github.com/micky24/debian7os/master/nginx.conf"
-mkdir -p /home/vps/public_html
-echo "<pre>Created by Micky Maximus</pre>" > /home/vps/public_html/index.html
-wget -O /home/vps/public_html/uptime.php "https://raw.github.com/micky24/debian7os/master/uptime.php"
-echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/micky24/debian7os/master/vps.conf"
-sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
-service php5-fpm restart
-service nginx restart
+#cd
+#rm /etc/nginx/sites-enabled/default
+#rm /etc/nginx/sites-available/default
+#wget -O /etc/nginx/nginx.conf "https://raw.github.com/micky24/debian7os/master/nginx.conf"
+#mkdir -p /home/vps/public_html
+#echo "<pre>Created by Micky Maximus</pre>" > /home/vps/public_html/index.html
+#wget -O /home/vps/public_html/uptime.php "https://raw.github.com/micky24/debian7os/master/uptime.php"
+#echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
+#wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/micky24/debian7os/master/vps.conf"
+#sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
+#service php5-fpm restart
+#service nginx restart
 
 # install openvpn
 #wget -O /etc/openvpn/openvpn.tar "https://raw.github.com/micky24/debian7os/master/openvpn-debian.tar"
@@ -118,26 +118,26 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.github.com/micky24/debian7os/master/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.github.com/micky24/debian7os/master/mrtg-mem.sh"
-chmod +x /root/mrtg-mem.sh
-cd /etc/snmp/
-sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
-service snmpd restart
-snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
-mkdir -p /home/vps/public_html/mrtg
-cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.github.com/micky24/debian7os/master/mrtg.conf" >> /etc/mrtg.cfg
-sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
-sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
-indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-cd
+#wget -O /etc/snmp/snmpd.conf "https://raw.github.com/micky24/debian7os/master/snmpd.conf"
+#wget -O /root/mrtg-mem.sh "https://raw.github.com/micky24/debian7os/master/mrtg-mem.sh"
+#chmod +x /root/mrtg-mem.sh
+#cd /etc/snmp/
+#sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
+#service snmpd restart
+#snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
+#mkdir -p /home/vps/public_html/mrtg
+#cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
+#curl "https://raw.github.com/micky24/debian7os/master/mrtg.conf" >> /etc/mrtg.cfg
+#sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
+#sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
+#indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
+#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+#cd
 
 # setting port ssh
-#sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
 #sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
@@ -165,18 +165,18 @@ ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 service dropbear restart
 
 # install vnstat gui
-cd /home/vps/public_html/
-wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 vnstat
-cd vnstat
-sed -i 's/eth0/eth0/g' config.php
-sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
-sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-sed -i 's/Internal/Internet/g' config.php
-sed -i '/SixXS IPv6/d' config.php
-cd
+#cd /home/vps/public_html/
+#wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+#tar xf vnstat_php_frontend-1.5.1.tar.gz
+#rm vnstat_php_frontend-1.5.1.tar.gz
+#mv vnstat_php_frontend-1.5.1 vnstat
+#cd vnstat
+#sed -i 's/eth0/eth0/g' config.php
+#sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
+#sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
+#sed -i 's/Internal/Internet/g' config.php
+#sed -i '/SixXS IPv6/d' config.php
+#cd
 
 # install fail2ban
 apt-get -y install fail2ban;service fail2ban restart
@@ -189,10 +189,10 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.720/webmin_1.720_all.deb
-dpkg -i --force-all webmin_1.720_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.730/webmin_1.730_all.deb
+dpkg -i --force-all webmin_1.730_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.720_all.deb
+rm /root/webmin_1.730_all.deb
 service webmin restart
 service vnstat restart
 
