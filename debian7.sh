@@ -40,7 +40,7 @@ apt-get -y --purge remove bind9*;
 apt-get update; apt-get -y upgrade;
 
 # install webserver
-apt-get -y install nginx php5-fpm php5-cli
+# apt-get -y install nginx php5-fpm php5-cli
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
@@ -188,10 +188,10 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.730/webmin_1.730_all.deb
-dpkg -i --force-all webmin_1.730_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.740/webmin_1.740_all.deb
+dpkg -i --force-all webmin_1.740_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.730_all.deb
+rm /root/webmin_1.740_all.deb
 service webmin restart
 service vnstat restart
 
@@ -210,7 +210,7 @@ wget -O /etc/issue.net "https://raw.github.com/micky24/debian7os/master/banner"
 echo "0 */24 * * * root /root/userexpired.sh" > /etc/cron.d/userexpired
 echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimit
 #echo "0 */24 * * * root /sbin/reboot" > /etc/cron.d/reboot
-echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
+#echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
 #echo "@reboot root /root/autokill.sh" > /etc/cron.d/autokill
 #sed -i '$ i\screen -AmdS check /root/autokill.sh' /etc/rc.local
 chmod +x bench-network.sh
