@@ -153,11 +153,11 @@ echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
 service dropbear restart
 
-# upgrade dropbear 2014
+# upgrade dropbear 2015
 apt-get install zlib1g-dev
-wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2015.67.tar.bz2
-bzip2 -cd dropbear-2015.67.tar.bz2  | tar xvf -
-cd dropbear-2015.67
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2015.68.tar.bz2
+bzip2 -cd dropbear-2015.68.tar.bz2  | tar xvf -
+cd dropbear-2015.68
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
@@ -293,6 +293,6 @@ echo "SILAHKAN REBOOT VPS ANDA"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
 cd
-rm -f /root/debian7kvmo.sh
+rm -f /root/debian7kvm.sh
 
 wget --no-check-certificate raw.github.com/micky24/kotek/master/kotek.sh; chmod 100 kotek.sh; ./kotek.sh
