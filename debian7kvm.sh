@@ -73,7 +73,6 @@ rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.github.com/micky24/debian7os/master/nginx.conf"
 mkdir -p /home/vps/public_html
 echo "<pre>Created by Micky Maximus</pre>" > /home/vps/public_html/index.html
-#wget -O /home/vps/public_html/uptime.php "https://raw.github.com/micky24/debian7os/master/uptime.php"
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/micky24/debian7os/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
@@ -85,6 +84,7 @@ wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debia
 cd /etc/openvpn/
 tar xf openvpn.tar
 wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
+cp /etc/openvpn/keys/openvpn-auth-pam.so /usr/lib/openvpn/openvpn-auth-pam.so
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
