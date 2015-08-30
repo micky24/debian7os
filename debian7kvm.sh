@@ -84,7 +84,6 @@ wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debia
 cd /etc/openvpn/
 tar xf openvpn.tar
 wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
-cp /etc/openvpn/keys/openvpn-auth-pam.so /usr/lib/openvpn/openvpn-auth-pam.so
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
