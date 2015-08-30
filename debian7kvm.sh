@@ -96,15 +96,12 @@ iptables-restore < /etc/iptables.up.rules
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
-sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
+wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
+sed -i $MYIP2 /etc/openvpn/client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false micky24
 echo "micky24:$PASS" | chpasswd
-echo "username" >> pass.txt
-echo "password" >> pass.txt
-tar cf client.tar 1194-client.ovpn pass.txt
-cp client.tar /home/vps/public_html/
+cp client.ovpn /home/vps/public_html/
 cd
 
 # install badvpn
@@ -138,7 +135,6 @@ cd
 
 # setting port ssh
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
-#sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
@@ -164,20 +160,6 @@ make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
 ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 service dropbear restart
-
-# install vnstat gui
-#cd /home/vps/public_html/
-#wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
-#tar xf vnstat_php_frontend-1.5.1.tar.gz
-#rm vnstat_php_frontend-1.5.1.tar.gz
-#mv vnstat_php_frontend-1.5.1 vnstat
-#cd vnstat
-#sed -i 's/eth0/eth0/g' config.php
-#sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
-#sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-#sed -i 's/Internal/Internet/g' config.php
-#sed -i '/SixXS IPv6/d' config.php
-#cd
 
 # install fail2ban
 apt-get -y install fail2ban;service fail2ban restart
@@ -211,10 +193,8 @@ wget -O expire.sh "http://script.deltacompt.com/vps/userexpired.sh"
 wget -O /etc/issue.net "https://raw.github.com/micky24/debian7os/master/banner"
 echo "0 */24 * * * root /root/userexpired.sh" > /etc/cron.d/userexpired
 echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimit
-#echo "0 */24 * * * root /sbin/reboot" > /etc/cron.d/reboot
+echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
 echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
-#echo "@reboot root /root/autokill.sh" > /etc/cron.d/autokill
-#sed -i '$ i\screen -AmdS check /root/autokill.sh' /etc/rc.local
 chmod +x bench-network.sh
 chmod +x speedtest_cli.py
 chmod +x ps_mem.py
@@ -240,60 +220,7 @@ service squid3 restart
 service webmin restart
 rm -rf ~/.bash_history && history -c
 echo "unset HISTFILE" >> /etc/profile
-
-# info
-clear
-echo ""  | tee -a log-install.txt
-echo "AUTOSCRIPT INCLUDES" | tee log-install.txt
-echo "===============================================" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Service"  | tee -a log-install.txt
-echo "-------"  | tee -a log-install.txt
-#echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
-echo "OpenSSH  : 22"  | tee -a log-install.txt
-echo "Dropbear : 443"  | tee -a log-install.txt
-echo "Squid3   : 8080, 80 (limit to IP SSH)"  | tee -a log-install.txt
-echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
-echo "nginx    : 81"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Tools"  | tee -a log-install.txt
-echo "-----"  | tee -a log-install.txt
-echo "axel"  | tee -a log-install.txt
-echo "bmon"  | tee -a log-install.txt
-echo "htop"  | tee -a log-install.txt
-echo "iftop"  | tee -a log-install.txt
-echo "mtr"  | tee -a log-install.txt
-echo "rkhunter"  | tee -a log-install.txt
-echo "nethogs: nethogs eth0"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Script"  | tee -a log-install.txt
-echo "------"  | tee -a log-install.txt
-echo "screenfetch"  | tee -a log-install.txt
-echo "./ps_mem.py"  | tee -a log-install.txt
-echo "./speedtest_cli.py --share"  | tee -a log-install.txt
-echo "./bench-network.sh"  | tee -a log-install.txt
-echo "./userlogin.sh" | tee -a log-install.txt
-echo "./userexpired.sh" | tee -a log-install.txt
-echo "./userlimit.sh 2 [ini utk melimit max 2 login]" | tee -a log-install.txt
-echo "sh dropmon [port] contoh: sh dropmon 443" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Fitur lain"  | tee -a log-install.txt
-echo "----------"  | tee -a log-install.txt
-echo "Webmin   : https://$MYIP:10000/"  | tee -a log-install.txt
-echo "vnstat   : http://$MYIP:81/vnstat/"  | tee -a log-install.txt
-echo "MRTG     : http://$MYIP:81/mrtg/"  | tee -a log-install.txt
-echo "Timezone : Asia/Jakarta"  | tee -a log-install.txt
-echo "Fail2Ban : [on]"  | tee -a log-install.txt
-echo "IPv6     : [off]"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Script Modified by Micky Maximus"  | tee -a log-install.txt
-echo "Thanks to Original Creator Kang Arie & Mikodemos"
-echo ""  | tee -a log-install.txt
-echo "VPS AUTO REBOOT TIAP TENGAH MALAM"  | tee -a log-install.txt
-echo "SILAHKAN REBOOT VPS ANDA"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "==============================================="  | tee -a log-install.txt
+echo "INSTALLASI SELESAI!!!"
+echo "SILAHKAN REEBOT VPS ANDA"
 cd
-rm -f /root/debian7kvm.sh
-
-wget --no-check-certificate raw.github.com/micky24/kotek/master/kotek.sh; chmod 100 kotek.sh; ./kotek.sh
+rm -f /root/debian7*
