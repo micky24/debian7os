@@ -44,7 +44,7 @@ apt-get -y install nginx php5-fpm php5-cli
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter 
+apt-get -y install bmon iftop htop nmap openvpn axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter 
 apt-get -y install build-essential
 
 # disable exim
@@ -81,11 +81,11 @@ service php5-fpm restart
 service nginx restart
 
 # install openvpn
-#wget -O /e#tc/openvpn/openvpn.tar "https://raw.github.com/micky24/debian7os/master/openvpn-debian.tar"
-#cd /etc/op#envpn/
-#tar xf ope#nvpn.tar
-#wget -O /e#tc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
-#service op#envpn restart
+wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debian.tar"
+cd /etc/openvpn/
+tar xf openvpn.tar
+wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
+service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 wget -O /etc/iptables.up.rules "https://raw.github.com/micky24/debian7os/master/iptables.up.rules.kvm"
@@ -95,17 +95,17 @@ iptables-restore < /etc/iptables.up.rules
 #service openvpn restart
 
 # configure openvpn client config
-#cd /etc/openvpn/
-#wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
-#sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
-#PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-#useradd -M -s /bin/false micky24
-#echo "micky24:$PASS" | chpasswd
-#echo "username" >> pass.txt
-#echo "password" >> pass.txt
-#tar cf client.tar 1194-client.ovpn pass.txt
-#cp client.tar /home/vps/public_html/
-#cd
+cd /etc/openvpn/
+wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
+sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
+PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
+useradd -M -s /bin/false micky24
+echo "micky24:$PASS" | chpasswd
+echo "username" >> pass.txt
+echo "password" >> pass.txt
+tar cf client.tar 1194-client.ovpn pass.txt
+cp client.tar /home/vps/public_html/
+cd
 
 # install badvpn
 wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/micky24/debian7os/master/badvpn-udpgw"
@@ -157,6 +157,7 @@ service dropbear restart
 apt-get install zlib1g-dev
 wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2015.68.tar.bz2
 bzip2 -cd dropbear-2015.68.tar.bz2  | tar xvf -
+rm dropbear-2015.68.tar.bz2
 cd dropbear-2015.68
 ./configure
 make && make install
@@ -192,20 +193,20 @@ cd
 wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.760/webmin_1.760_all.deb
 dpkg -i --force-all webmin_1.760_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.740_all.deb
+rm /root/webmin*
 service webmin restart
 service vnstat restart
 
 # download script
 cd
 wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
-wget -O bench-network.sh "https://raw.github.com/micky24/debian7os/master/bench-network.sh"
+wget -O bench-network.sh "http://script.deltacompt.com/vps/bench-network.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O dropmon "https://raw.github.com/micky24/debian7os/master/dropmon.sh"
+wget -O dropmon "http://script.deltacompt.com/vps/dropmon.sh"
 wget -O userlogin.sh "https://raw.github.com/micky24/debian7os/master/userlogin.sh"
-wget -O userexpired.sh "https://raw.github.com/micky24/debian7os/master/userexpired.sh"
+wget -O userexpired.sh "http://script.deltacompt.com/vps/userexpired.sh"
 wget -O userlimit.sh "https://raw.github.com/micky24/debian7os/master/userlimit.sh"
-wget -O expire.sh "https://raw.github.com/micky24/debian7os/master/expire.sh"
+wget -O expire.sh "http://script.deltacompt.com/vps/userexpired.sh"
 #wget -O autokill.sh "https://raw.github.com/micky24/debian7os/master/autokill.sh"
 wget -O /etc/issue.net "https://raw.github.com/micky24/debian7os/master/banner"
 echo "0 */24 * * * root /root/userexpired.sh" > /etc/cron.d/userexpired
