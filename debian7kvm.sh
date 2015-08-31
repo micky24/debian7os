@@ -181,13 +181,13 @@ service vnstat restart
 # download script
 cd
 wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
-wget -O bench-network.sh "http://script.deltacompt.com/vps/bench-network.sh"
+wget -O bench-network.sh "https://raw.github.com/micky24/debian7os/master/bench-network.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O dropmon "http://script.deltacompt.com/vps/dropmon.sh"
+wget -O dropmon "https://raw.github.com/micky24/debian7os/master/dropmon.sh"
 wget -O userlogin.sh "https://raw.github.com/micky24/debian7os/master/userlogin.sh"
-wget -O userexpired.sh "http://script.deltacompt.com/vps/userexpired.sh"
+wget -O userexpired.sh "https://raw.github.com/micky24/debian7os/master/userexpired.sh"
 wget -O userlimit.sh "https://raw.github.com/micky24/debian7os/master/userlimit.sh"
-wget -O expire.sh "http://script.deltacompt.com/vps/userexpired.sh"
+wget -O expire.sh "https://raw.github.com/micky24/debian7os/master/expire.sh"
 #wget -O autokill.sh "https://raw.github.com/micky24/debian7os/master/autokill.sh"
 wget -O /etc/issue.net "https://raw.github.com/micky24/debian7os/master/banner"
 echo "0 */24 * * * root /root/userexpired.sh" > /etc/cron.d/userexpired
