@@ -80,28 +80,28 @@ service php5-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debian.tar"
-cd /etc/openvpn/
-tar xf openvpn.tar
+#wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debian.tar"
+#cd /etc/openvpn/
+#tar xf openvpn.tar
 #wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
-service openvpn restart
-sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.github.com/micky24/debian7os/master/iptables.up.rules.kvm"
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
-sed -i $MYIP2 /etc/iptables.up.rules;
-iptables-restore < /etc/iptables.up.rules
+#service openvpn restart
+#sysctl -w net.ipv4.ip_forward=1
+#sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+#wget -O /etc/iptables.up.rules "https://raw.github.com/micky24/debian7os/master/iptables.up.rules.kvm"
+#sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
+#sed -i $MYIP2 /etc/iptables.up.rules;
+#iptables-restore < /etc/iptables.up.rules
 #service openvpn restart
 
 # configure openvpn client config
-cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
-sed -i $MYIP2 /etc/openvpn/client.ovpn;
-PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false micky24
-echo "micky24:$PASS" | chpasswd
-cp client.ovpn /home/vps/public_html/
-cd
+#cd /etc/openvpn/
+#wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
+#sed -i $MYIP2 /etc/openvpn/client.ovpn;
+#PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
+#useradd -M -s /bin/false micky24
+#echo "micky24:$PASS" | chpasswd
+#cp client.ovpn /home/vps/public_html/
+#cd
 
 # install badvpn
 wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/micky24/debian7os/master/badvpn-udpgw"
@@ -148,12 +148,12 @@ echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
 service dropbear restart
 
-# upgrade dropbear 2015
+# upgrade dropbear
 apt-get install zlib1g-dev
-wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2015.68.tar.bz2
-bzip2 -cd dropbear-2015.68.tar.bz2  | tar xvf -
-rm dropbear-2015.68.tar.bz2
-cd dropbear-2015.68
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2014.65.tar.bz2
+bzip2 -cd dropbear-2014.65.tar.bz2  | tar xvf -
+rm dropbear-2014.65.tar.bz2
+cd dropbear-2014.65
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
