@@ -83,7 +83,7 @@ service nginx restart
 wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
+rm openvpn.tar
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
@@ -95,7 +95,7 @@ service openvpn restart
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
+#wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false micky24
