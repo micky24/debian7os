@@ -37,9 +37,9 @@ do
         fi
 done
 
-echo "Checking PPTP Login"
-echo "-------------------"
-last | grep ppp | grep still
+echo "Checking OpenVPN Login"
+echo "----------------------"
+cat /etc/openvpn/log.log | grep 10.8
 
-echo "-----------------------------------------------"
-echo "Script Modified by Micky Maximus";
+echo "--------------------------"
+echo "Script by Micky Maximus";
