@@ -180,6 +180,7 @@ service vnstat restart
 
 # download script
 cd
+apt-get -y --force-yes -f install libxml-parser-perl
 wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
 wget -O bench-network.sh "https://raw.github.com/micky24/debian7os/master/bench-network.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
