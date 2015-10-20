@@ -171,8 +171,8 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.760/webmin_1.760_all.deb
-dpkg -i --force-all webmin_1.760_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.770/webmin_1.770_all.deb
+dpkg -i --force-all webmin_1.770_all.deb;
 apt-get -y -f install;
 rm /root/webmin*
 service webmin restart
