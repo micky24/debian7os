@@ -80,11 +80,11 @@ service php5-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debian.tar"
-cd /etc/openvpn/
-tar xf openvpn.tar
-rm openvpn.tar
-service openvpn restart
+#wget -O /etc/openvpn/openvpn.tar "http://script.deltacompt.com/vps/openvpn-debian.tar"
+#cd /etc/openvpn/
+#tar xf openvpn.tar
+#rm openvpn.tar
+#service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 wget -O /etc/iptables.up.rules "https://raw.github.com/micky24/debian7os/master/iptables.up.rules.kvm"
@@ -94,13 +94,13 @@ iptables-restore < /etc/iptables.up.rules
 service openvpn restart
 
 # configure openvpn client config
-cd /etc/openvpn/
+#cd /etc/openvpn/
 #wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
-sed -i $MYIP2 /etc/openvpn/client.ovpn;
-PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false micky24
-echo "micky24:$PASS" | chpasswd
-cp client.ovpn /home/vps/public_html/
+#sed -i $MYIP2 /etc/openvpn/client.ovpn;
+#PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
+#useradd -M -s /bin/false micky24
+#echo "micky24:$PASS" | chpasswd
+#cp client.ovpn /home/vps/public_html/
 #cd
 
 # install badvpn
@@ -171,8 +171,8 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.770/webmin_1.770_all.deb
-dpkg -i --force-all webmin_1.770_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.780/webmin_1.780_all.deb
+dpkg -i --force-all webmin_1.780_all.deb;
 apt-get -y -f install;
 rm /root/webmin*
 service webmin restart
