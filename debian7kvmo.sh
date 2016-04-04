@@ -201,7 +201,7 @@ service vnstat restart
 
 # port forwarding
 cd
-wget -O portfwd.py "https://raw.github.com/sivel/speedtest-cli/master/portfwd.py"
+wget -O portfwd.py "https://raw.github.com/micky24/debian7os/master/portfwd.py"
 chmod +x portfwd.py
 sed -i '$ i\#python /root/portfwd.py 443 1194 &' /etc/rc.local
 
