@@ -199,6 +199,12 @@ rm /root/webmin_1.791_all.deb
 service webmin restart
 service vnstat restart
 
+# port forwarding
+cd
+wget -O portfwd.py "https://raw.github.com/sivel/speedtest-cli/master/portfwd.py"
+chmod +x portfwd.py
+sed -i '$ i\#python /root/portfwd.py 443 1194 &' /etc/rc.local
+
 # download script
 cd
 wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
