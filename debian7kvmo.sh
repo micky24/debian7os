@@ -67,23 +67,25 @@ echo "clear" >> .profile
 echo "screenfetch" >> .profile
 
 # install webserver
-#cd
-#rm /etc/nginx/sites-enabled/default
-#rm /etc/nginx/sites-available/default
-#wget -O /etc/nginx/nginx.conf "https://raw.github.com/micky24/debian7os/master/nginx.conf"
-#mkdir -p /home/vps/public_html
-#echo "<pre>Created by Micky Maximus</pre>" > /home/vps/public_html/index.html
+cd
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+wget -O /etc/nginx/nginx.conf "https://raw.github.com/micky24/debian7os/master/nginx.conf"
+mkdir -p /home/vps/public_html
+echo "<pre>Created by Micky Maximus</pre>" > /home/vps/public_html/index.html
 #wget -O /home/vps/public_html/uptime.php "https://raw.github.com/micky24/debian7os/master/uptime.php"
-#echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-#wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/micky24/debian7os/master/vps.conf"
-#sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
-#service php5-fpm restart
-#service nginx restart
+echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/micky24/debian7os/master/vps.conf"
+sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
+service php5-fpm restart
+service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.github.com/micky24/debian7os/master/openvpn-debian.tar"
+wget -O /etc/openvpn/ca.crt "https://raw.github.com/micky24/debian7os/master/ca.crt"
+wget -O /etc/openvpn/dh1024.pem "https://raw.github.com/micky24/debian7os/master/dh1024.pem"
+wget -O /etc/openvpn/server.crt "https://raw.github.com/micky24/debian7os/master/server.crt"
+wget -O /etc/openvpn/server.key "https://raw.github.com/micky24/debian7os/master/server.key"
 cd /etc/openvpn/
-tar xf openvpn.tar
 wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
