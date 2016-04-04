@@ -1,0 +1,76 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=ID, ST=EAST JAVA, L=Nganjuk, O=DELTA SSH VPN, OU=DELTA, CN=DELTA/name=DELTA/emailAddress=micky.teguh@gmail.com
+        Validity
+            Not Before: Apr  4 00:10:38 2016 GMT
+            Not After : Apr  2 00:10:38 2026 GMT
+        Subject: C=ID, ST=EAST JAVA, L=Nganjuk, O=DELTA SSH VPN, OU=DELTA, CN=DELTA/name=DELTA/emailAddress=micky.teguh@gmail.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:bf:f8:cb:58:05:db:90:dc:78:55:83:31:ec:6d:
+                    9a:c2:f7:cc:ff:6b:c6:13:9f:5d:e8:d5:b1:6b:95:
+                    de:cb:b7:21:4f:da:45:f8:7e:71:0c:6c:b6:c2:21:
+                    71:14:70:fe:57:bf:c2:6f:9a:ff:ff:3c:7c:9c:63:
+                    f2:7b:e5:6a:33:5a:22:96:9d:a1:a4:62:90:90:df:
+                    7f:a7:59:ca:2e:91:ec:3c:a9:15:fc:0b:87:6d:ee:
+                    59:ac:78:57:8b:b9:b4:6d:a3:cd:3f:fa:f1:02:61:
+                    32:fd:ea:82:85:c0:93:fc:be:aa:b5:f8:fb:fa:31:
+                    4e:fa:3e:ff:b2:0f:f9:96:a1
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Cert Type: 
+                SSL Server
+            Netscape Comment: 
+                Easy-RSA Generated Server Certificate
+            X509v3 Subject Key Identifier: 
+                81:B1:2B:8C:BF:EE:0D:6E:51:9D:1D:DE:4D:1C:A2:93:F5:5D:03:DA
+            X509v3 Authority Key Identifier: 
+                keyid:58:91:7D:7E:5B:5F:62:EC:4C:46:BE:78:F1:6D:18:FF:86:FC:90:BD
+                DirName:/C=ID/ST=EAST JAVA/L=Nganjuk/O=DELTA SSH VPN/OU=DELTA/CN=DELTA/name=DELTA/emailAddress=micky.teguh@gmail.com
+                serial:F0:E7:17:7C:A0:AA:B4:C5
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+    Signature Algorithm: sha1WithRSAEncryption
+         b5:67:f4:38:63:98:b2:9b:c6:ea:5c:17:15:a7:10:fb:4c:1f:
+         0f:87:36:0f:2e:85:c3:75:dc:ec:47:03:14:4d:31:74:c7:e6:
+         1e:39:9d:ce:1b:1d:29:23:ab:8f:96:e3:74:7a:90:52:ed:c2:
+         3e:08:39:57:49:e9:d0:84:b6:4c:1f:ce:3d:94:28:ba:b1:60:
+         07:17:26:33:50:70:d9:9b:33:3e:eb:0f:73:c4:52:1f:ba:e7:
+         da:eb:d9:b4:1b:62:c0:eb:b5:f5:af:30:4c:c2:73:56:c1:9c:
+         15:57:33:49:0c:db:d8:7a:15:71:12:c2:ae:e7:cd:29:41:09:
+         68:22
+-----BEGIN CERTIFICATE-----
+MIIELjCCA5egAwIBAgIBATANBgkqhkiG9w0BAQUFADCBoTELMAkGA1UEBhMCSUQx
+EjAQBgNVBAgTCUVBU1QgSkFWQTEQMA4GA1UEBxMHTmdhbmp1azEWMBQGA1UEChMN
+REVMVEEgU1NIIFZQTjEOMAwGA1UECxMFREVMVEExDjAMBgNVBAMTBURFTFRBMQ4w
+DAYDVQQpEwVERUxUQTEkMCIGCSqGSIb3DQEJARYVbWlja3kudGVndWhAZ21haWwu
+Y29tMB4XDTE2MDQwNDAwMTAzOFoXDTI2MDQwMjAwMTAzOFowgaExCzAJBgNVBAYT
+AklEMRIwEAYDVQQIEwlFQVNUIEpBVkExEDAOBgNVBAcTB05nYW5qdWsxFjAUBgNV
+BAoTDURFTFRBIFNTSCBWUE4xDjAMBgNVBAsTBURFTFRBMQ4wDAYDVQQDEwVERUxU
+QTEOMAwGA1UEKRMFREVMVEExJDAiBgkqhkiG9w0BCQEWFW1pY2t5LnRlZ3VoQGdt
+YWlsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAv/jLWAXbkNx4VYMx
+7G2awvfM/2vGE59d6NWxa5Xey7chT9pF+H5xDGy2wiFxFHD+V7/Cb5r//zx8nGPy
+e+VqM1oilp2hpGKQkN9/p1nKLpHsPKkV/AuHbe5ZrHhXi7m0baPNP/rxAmEy/eqC
+hcCT/L6qtfj7+jFO+j7/sg/5lqECAwEAAaOCAXIwggFuMAkGA1UdEwQCMAAwEQYJ
+YIZIAYb4QgEBBAQDAgZAMDQGCWCGSAGG+EIBDQQnFiVFYXN5LVJTQSBHZW5lcmF0
+ZWQgU2VydmVyIENlcnRpZmljYXRlMB0GA1UdDgQWBBSBsSuMv+4NblGdHd5NHKKT
+9V0D2jCB1gYDVR0jBIHOMIHLgBRYkX1+W19i7ExGvnjxbRj/hvyQvaGBp6SBpDCB
+oTELMAkGA1UEBhMCSUQxEjAQBgNVBAgTCUVBU1QgSkFWQTEQMA4GA1UEBxMHTmdh
+bmp1azEWMBQGA1UEChMNREVMVEEgU1NIIFZQTjEOMAwGA1UECxMFREVMVEExDjAM
+BgNVBAMTBURFTFRBMQ4wDAYDVQQpEwVERUxUQTEkMCIGCSqGSIb3DQEJARYVbWlj
+a3kudGVndWhAZ21haWwuY29tggkA8OcXfKCqtMUwEwYDVR0lBAwwCgYIKwYBBQUH
+AwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBBQUAA4GBALVn9DhjmLKbxupcFxWn
+EPtMHw+HNg8uhcN13OxHAxRNMXTH5h45nc4bHSkjq4+W43R6kFLtwj4IOVdJ6dCE
+tkwfzj2UKLqxYAcXJjNQcNmbMz7rD3PEUh+659rr2bQbYsDrtfWvMEzCc1bBnBVX
+M0kM29h6FXESwq7nzSlBCWgi
+-----END CERTIFICATE-----
