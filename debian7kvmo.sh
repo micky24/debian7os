@@ -157,9 +157,10 @@ service dropbear restart
 
 # upgrade dropbear 2014
 apt-get install zlib1g-dev
-wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2015.67.tar.bz2
-bzip2 -cd dropbear-2015.67.tar.bz2  | tar xvf -
-cd dropbear-2015.67
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2014.65.tar.bz2
+bzip2 -cd dropbear-2014.65.tar.bz2  | tar xvf -
+rm dropbear-2014.65.tar.bz2
+cd dropbear-2014.65
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
@@ -191,10 +192,10 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.730/webmin_1.730_all.deb
-dpkg -i --force-all webmin_1.730_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.791/webmin_1.791_all.deb
+dpkg -i --force-all webmin_1.791_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.730_all.deb
+rm /root/webmin_1.791_all.deb
 service webmin restart
 service vnstat restart
 
