@@ -40,7 +40,7 @@ apt-get -y --purge remove bind9*;
 apt-get update; apt-get -y upgrade;
 
 # install webserver
-#apt-get -y install nginx php5-fpm php5-cli
+apt-get -y install nginx php5-fpm php5-cli
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
