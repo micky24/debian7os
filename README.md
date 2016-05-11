@@ -7,6 +7,9 @@ wget --no-check-certificate raw.github.com/micky24/debian7os/master/debian7kvm.s
 KVM Openvpn
 wget --no-check-certificate raw.github.com/micky24/debian7os/master/debian7kvmo.sh; chmod 100 debian7kvmo.sh; ./debian7kvmo.sh
 
+minimum SSH KVM
+wget --no-check-certificate raw.github.com/micky24/debian7os/master/install; chmod 100 install; ./install
+
 
                                               Modified by Micky Maximus
                                 Thanks to Original Creator Kang Arie Wijayanto and Mikodemos
