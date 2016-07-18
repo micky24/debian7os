@@ -12,7 +12,7 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
-wget -O /etc/apt/sources.list "https://raw.github.com/micky24/debian7os/master/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.github.com/micky24/debian7os/master/sources.list.debian8"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
