@@ -96,6 +96,24 @@ sed -i $MYIP2 /etc/iptables.up.rules;
 iptables-restore < /etc/iptables.up.rules
 #service openvpn restart
 
+# install mrtg
+wget -O /etc/snmp/snmpd.conf "https://raw.github.com/micky24/debian7os/master/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://raw.github.com/micky24/debian7os/master/mrtg-mem.sh"
+chmod +x /root/mrtg-mem.sh
+cd /etc/snmp/
+sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
+service snmpd restart
+snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
+mkdir -p /home/vps/public_html/mrtg
+cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
+curl "https://raw.github.com/micky24/debian7os/master/mrtg.conf" >> /etc/mrtg.cfg
+sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
+sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
+indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
+if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+cd
 # configure openvpn client config
 cd /etc/openvpn/
 wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
@@ -118,25 +136,6 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
-
-# install mrtg
-#wget -O /etc/snmp/snmpd.conf "https://raw.github.com/micky24/debian7os/master/snmpd.conf"
-#wget -O /root/mrtg-mem.sh "https://raw.github.com/micky24/debian7os/master/mrtg-mem.sh"
-#chmod +x /root/mrtg-mem.sh
-#cd /etc/snmp/
-#sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
-#service snmpd restart
-#snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
-#mkdir -p /home/vps/public_html/mrtg
-#cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-#curl "https://raw.github.com/micky24/debian7os/master/mrtg.conf" >> /etc/mrtg.cfg
-#sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
-#sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
-#indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
-#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-#cd
 
 # setting port ssh
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
@@ -252,4 +251,4 @@ cd
 
 rm -f /root/debian7kvmo.sh
 
-wget --no-check-certificate raw.github.com/micky24/kotek/master/kotek.sh; chmod 100 kotek.sh; ./kotek.sh
+#wget --no-check-certificate raw.github.com/micky24/kotek/master/kotek.sh; chmod 100 kotek.sh; ./kotek.sh
