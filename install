@@ -11,7 +11,15 @@ apt-get update;apt-get -y install wget curl;
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
-
+cd /var
+touch swap.img
+chmod 600 swap.img
+dd if=/dev/zero of=/var/swap.img bs=1024k count=1000
+mkswap /var/swap.img
+swapon /var/swap.img
+free
+echo "/var/swap.img    none    swap    sw    0    0" >> /etc/fstab
+sysctl -w vm.swappiness=30
 wget -O /etc/apt/sources.list "https://raw.github.com/micky24/debian7os/master/sources.list.debian7"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
