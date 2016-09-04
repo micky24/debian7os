@@ -79,6 +79,16 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS=""/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
+apt-get install zlib1g-dev
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2014.65.tar.bz2
+bzip2 -cd dropbear-2014.65.tar.bz2  | tar xvf -
+rm dropbear-2014.65.tar.bz2
+cd dropbear-2014.65
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear1
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
+service dropbear restart
 apt-get -y install fail2ban;service fail2ban restart
 apt-get -y install squid3
 wget -O /etc/squid3/squid.conf "https://raw.github.com/micky24/debian7os/master/squid3.conf"
