@@ -52,7 +52,7 @@ wget -O /etc/openvpn/dh1024.pem "https://raw.github.com/micky24/debian7os/master
 wget -O /etc/openvpn/server.crt "https://raw.github.com/micky24/debian7os/master/server.crt"
 wget -O /etc/openvpn/server.key "https://raw.github.com/micky24/debian7os/master/server.key"
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
+wget -O /etc/openvpn/80.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
@@ -69,7 +69,7 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 wget -O /etc/snmp/snmpd.conf "https://raw.github.com/micky24/debian7os/master/snmpd.conf"
 wget -O /root/mrtg-mem.sh "https://raw.github.com/micky24/debian7os/master/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 80' /etc/ssh/sshd_config
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
 apt-get -y install dropbear
@@ -95,8 +95,8 @@ wget -O /etc/squid3/squid.conf "https://raw.github.com/micky24/debian7os/master/
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.791/webmin_1.791_all.deb
-dpkg -i --force-all webmin_1.791_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.810/webmin_1.810_all.deb
+dpkg -i --force-all webmin_1.810_all.deb;
 apt-get -y -f install;
 rm /root/webmin*
 service webmin restart
