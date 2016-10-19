@@ -52,7 +52,7 @@ wget -O /etc/openvpn/dh1024.pem "https://raw.github.com/micky24/debian7os/master
 wget -O /etc/openvpn/server.crt "https://raw.github.com/micky24/debian7os/master/server.crt"
 wget -O /etc/openvpn/server.key "https://raw.github.com/micky24/debian7os/master/server.key"
 cd /etc/openvpn/
-wget -O /etc/openvpn/80.conf "https://raw.github.com/micky24/debian7os/master/80.conf"
+wget -O /etc/openvpn/1605.conf "https://raw.github.com/micky24/debian7os/master/80.conf"
 wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
@@ -96,8 +96,8 @@ wget -O /etc/squid3/squid.conf "https://raw.github.com/micky24/debian7os/master/
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.810/webmin_1.810_all.deb
-dpkg -i --force-all webmin_1.810_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.820/webmin_1.820_all.deb
+dpkg -i --force-all webmin_1.820_all.deb;
 apt-get -y -f install;
 rm /root/webmin*
 service webmin restart
