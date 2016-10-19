@@ -70,13 +70,13 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 wget -O /etc/snmp/snmpd.conf "https://raw.github.com/micky24/debian7os/master/snmpd.conf"
 wget -O /root/mrtg-mem.sh "https://raw.github.com/micky24/debian7os/master/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
-sed -i '/Port 22/a Port 80' /etc/ssh/sshd_config
+#sed -i '/Port 22/a Port 80' /etc/ssh/sshd_config
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS=""/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
