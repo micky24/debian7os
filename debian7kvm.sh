@@ -8,11 +8,6 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 
 # go to root
 cd
-
-# disable ipv6
-echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
-sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
-
 # install wget and curl
 apt-get update;apt-get -y install wget curl;
 
@@ -142,7 +137,7 @@ service ssh restart
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS=""/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 #echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
@@ -150,14 +145,14 @@ service dropbear restart
 
 # upgrade dropbear
 apt-get install zlib1g-dev
-#wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2014.65.tar.bz2
-#bzip2 -cd dropbear-2014.65.tar.bz2  | tar xvf -
-#rm dropbear-2014.65.tar.bz2
-#cd dropbear-2014.65
-#./configure
-#make && make install
-#mv /usr/sbin/dropbear /usr/sbin/dropbear1
-#ln /usr/local/sbin/dropbear /usr/sbin/dropbear
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2014.65.tar.bz2
+bzip2 -cd dropbear-2014.65.tar.bz2  | tar xvf -
+rm dropbear-2014.65.tar.bz2
+cd dropbear-2014.65
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear1
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 service dropbear restart
 
 # install fail2ban
@@ -171,8 +166,8 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.780/webmin_1.780_all.deb
-dpkg -i --force-all webmin_1.780_all.deb;
+wget http://jaist.dl.sourceforge.net/project/webadmin/webmin/1.840/webmin_1.840_all.deb
+dpkg -i --force-all webmin_1.840_all.deb;
 apt-get -y -f install;
 rm /root/webmin*
 service webmin restart
@@ -181,7 +176,7 @@ service vnstat restart
 # download script
 cd
 apt-get -y --force-yes -f install libxml-parser-perl
-wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
+wget -O speedtest_cli.py "https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py"
 wget -O bench-network.sh "https://raw.github.com/micky24/debian7os/master/bench-network.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
 wget -O dropmon "https://raw.github.com/micky24/debian7os/master/dropmon.sh"
