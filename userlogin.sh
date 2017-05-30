@@ -42,4 +42,4 @@ echo "----------------------"
 cat /etc/openvpn/log.log | grep 10.8
 
 echo "--------------------------"
-echo "Script by Micky Maximus";
+echo "Script by warungvps.net";
