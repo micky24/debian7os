@@ -42,7 +42,7 @@ do
     fi
 done
 echo "---------------------------------------------------------------" 
-echo "                        Script By Micky Maximus                " 
+echo "                        Script By warungvps.net                " 
 else
 echo "  Gunakan perintah ./dropmon.sh [port]"
 echo "  contoh : ./dropmon.sh 443"
