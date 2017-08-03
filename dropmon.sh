@@ -44,10 +44,8 @@ done
 echo "---------------------------------------------------------------" 
 echo "                        Script By warungvps.net                " 
 else
-echo "  Gunakan perintah ./dropmon.sh [port]"
-echo "  contoh : ./dropmon.sh 443"
-echo \n
-echo \n
+echo "  Gunakan perintah cek [port]"
+echo "  contoh : cek 443"
 fi
 exit 0
 
