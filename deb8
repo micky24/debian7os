@@ -5,8 +5,6 @@ OS=`uname -m`;
 MYIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0'`;
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 cd
-#echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
-#sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 apt-get update;apt-get -y install wget curl;
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
@@ -20,6 +18,7 @@ swapon /var/swap.img
 free
 echo "/var/swap.img    none    swap    sw    0    0" >> /etc/fstab
 sysctl -w vm.swappiness=30
+cd
 wget -O /etc/apt/sources.list "https://raw.github.com/micky24/debian7os/master/sources.list.debian8"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
@@ -33,7 +32,7 @@ apt-get -y --purge remove bind9*;
 apt-get -y --purge remove exim*;
 
 apt-get update; apt-get -y upgrade;
-apt-get -y install bmon iftop htop nmap openvpn axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
+apt-get -y install bmon iftop htop nmap openvpn axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
 apt-get -y install build-essential
 service exim4 stop
 sysv-rc-conf exim4 off
@@ -76,7 +75,7 @@ wget -O /etc/openvpn/dh1024.pem "https://raw.github.com/micky24/debian7os/master
 wget -O /etc/openvpn/server.crt "https://raw.github.com/micky24/debian7os/master/server.crt"
 wget -O /etc/openvpn/server.key "https://raw.github.com/micky24/debian7os/master/server.key"
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.github.com/micky24/debian7os/master/1194-8.conf"
 wget -O /etc/openvpn/client.ovpn "https://raw.github.com/micky24/debian7os/master/1194-client.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
 cp client.ovpn /home/vps/public_html/
