@@ -143,4 +143,4 @@ echo "unset HISTFILE" >> /etc/profile
 echo "INSTALLASI SELESAI!!!"
 echo "SILAHKAN REEBOT VPS ANDA"
 cd
-rm -f /root/install
+rm -f /root/deb8
